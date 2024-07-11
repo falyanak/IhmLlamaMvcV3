@@ -1,0 +1,28 @@
+﻿<div class="navbar">
+    <h1>IHM LLAMA3</h1>
+</div>
+
+<div class="sidebar" id="mySidebar">
+    <button id="resetButton" class="reset" classe="haha">Réinitialiser la conversation</button>
+    <a href="#">Historique</a>
+    <a href="#">requête 1</a>
+</div>
+
+<div class="main-content">
+    <h2>Posez votre question :</h2>
+    <form id="searchForm">
+        <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
+        <button type="submit" class="recherche" id="rechercher">Rechercher</button>
+    </form>
+    <div class="sortie">
+        <div id="results">
+            <textarea class="resultat" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
+            <div id="animChargement"></div>
+        </div>
+    <h3 class="mt-4">Historique des entrées</h3>
+    <ul id="historyList" class="list-group"></ul>
+    </div>
+</div>
+
+<script src="~/js/ShowIaprompt.js"></script>
+

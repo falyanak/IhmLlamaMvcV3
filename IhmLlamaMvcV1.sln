@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IhmLlamaMvc.WebApi", "Src\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IhmLlamaMvc.Mvc", "Src\Presentation\IhmLlamaMvc.Mvc\IhmLlamaMvc.Mvc.csproj", "{361E7FD3-60AF-49DF-8E0B-125A0D1359C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IhmLlamaMvc.SharedKernel", "Src\SharedKernel\IhmLlamaMvc.SharedKernel\IhmLlamaMvc.SharedKernel.csproj", "{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{361E7FD3-60AF-49DF-8E0B-125A0D1359C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{361E7FD3-60AF-49DF-8E0B-125A0D1359C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{361E7FD3-60AF-49DF-8E0B-125A0D1359C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{420C2AFA-A2E4-4D89-BFFD-805D29E072C4} = {6AF6A998-459D-40CD-9956-F525DD12EBB6}
 		{0681C343-7CF7-4344-843D-DB87530DCB14} = {B26BE43D-BC9C-42D2-A122-762A909A239C}
 		{361E7FD3-60AF-49DF-8E0B-125A0D1359C4} = {22580379-6E9A-4387-A98A-46E877ECE89D}
+		{3D0E4BA2-7C4A-42D0-8979-A4B66FA230A9} = {4C907258-81CF-4DB6-A2AB-A9F9C4965BD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4B2CB67-75EB-45F9-B6E6-168C4785D585}

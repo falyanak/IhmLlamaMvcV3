@@ -15,40 +15,6 @@ window.onload = function () {
 
 // envoi de la question au serveur Paolo
 
-function PostData1(event) {
-    fetch('/api/openai/stream?prompt=Hello%20World')
-        .then(response => {
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder('utf-8');
-            const stream = new ReadableStream({
-                start(controller) {
-                    function push() {
-                        reader.read().then(({ done, value }) => {
-                            if (done) {
-                                controller.close();
-                                return;
-                            }
-                            controller.enqueue(decoder.decode(value));
-                            push();
-                        }).catch(err => {
-                            console.error('Error reading stream:', err);
-                            controller.error(err);
-                        });
-                    };
-                    push();
-                }
-            });
-
-            return new Response(stream, { headers: { 'Content-Type': 'text/plain' } });
-        })
-        .then(response => response.text())
-        .then(text => {
-            // Process the streamed text here
-            console.log(text);
-        })
-        .catch(err => console.error('Error fetching data:', err));
-
-}
 async function postData(event) {
 
     event.preventDefault();
@@ -63,10 +29,8 @@ async function postData(event) {
 
     const postdata = { question: queryInput };
 
-    alert(queryInput);
-    // Afficher l'animation de chargement
- //   document.getElementById("animChargement").style.display = 'block';
-    displayBusyIndicator();
+    // afficher l'indicateur de chargement
+     displayBusyIndicator();
 
     let request = {
         method: 'POST',
@@ -80,7 +44,7 @@ async function postData(event) {
     console.log(json);
     element.disabled = false;
 
-  //  document.getElementById("animChargement").style.display = 'none';
+    // cacher l'indicateur de chargement
     hideBusyIndicator();
 
     successFunc(json);
@@ -97,7 +61,7 @@ function errorFunc() {
 function addEntryToHistory(entry) {
     const historyList = document.getElementById("historyList");
     const newEntry = document.createElement("li");
-    newEntry.className = "list-group-item";
+   // newEntry.className = "list-group-item";
     newEntry.textContent = entry;
     historyList.appendChild(newEntry);
 }
@@ -117,21 +81,7 @@ function resetConversation() {
 }
 
 
-//var input = document.getElementById("requete");
-//input.addEventListener("keypress", function (event) {
-//    // If the user presses the "Enter" key on the keyboard
-//    if (event.key === "Enter") {
-//        // Trigger the button element with a click
-//        if (event.shiftKey) {
-//            // Ne rien faire et permettre le comportement par défaut (insertion d'une nouvelle ligne)
-//            return;
-//        }
-//        event.preventDefault();
-//        postData();
-//        input.setSelectionRange(0, 0);
-//        input.focus(); // Assurer que l'élément est focalisé
-//    }
-//}); 
+
 
 
 

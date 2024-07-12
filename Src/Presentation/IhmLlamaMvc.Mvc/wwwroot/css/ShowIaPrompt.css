@@ -61,7 +61,7 @@ textarea.entrer {
     border: 1px solid #ccc;
     border-radius: 20px;
     max-width: 900px;
-    height: 400px;
+    height: 200px;
     width: 600px;
     resize: none;
 }
@@ -74,7 +74,7 @@ textarea.resultat {
     border: 1px solid #ccc;
     border-radius: 20px;
     max-width: 900px;
-    height: 400px;
+    height: 200px;
     width: 600px;
     resize: none;
 }

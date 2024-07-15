@@ -1,11 +1,9 @@
-using Azure.Core;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using System.Text;
 
-
-namespace IhmLlamaMvc.Controllers
+namespace IhmLlamaMvc.Mvc.Controllers
 {
 
 

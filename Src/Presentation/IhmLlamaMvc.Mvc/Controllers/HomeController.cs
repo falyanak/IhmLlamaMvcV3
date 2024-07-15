@@ -1,12 +1,8 @@
-using IhmLlamaMvc.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel;
 using System.Diagnostics;
-using System.Text;
+using IhmLlamaMvc.Mvc.Models;
+using Microsoft.AspNetCore.Mvc;
 
-
-namespace IhmLlamaMvc.Controllers
+namespace IhmLlamaMvc.Mvc.Controllers
 {
     // bidoullage pour faire fonctionner les requetes json depuis JS
     public class Requete

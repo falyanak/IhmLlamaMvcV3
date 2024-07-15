@@ -1,4 +1,5 @@
 ﻿using IhmLlamaMvc.Domain.Entites;
+using IhmLlamaMvc.Domain.Entites.Conversations;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace IhmLlamaMvc.Application.Interfaces

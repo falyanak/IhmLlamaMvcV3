@@ -1,5 +1,6 @@
 ﻿using IhmLlamaMvc.Application.Interfaces;
 using IhmLlamaMvc.Domain.Entites;
+using IhmLlamaMvc.Domain.Entites.Conversations;
 
 namespace IhmLlamaMvc.Application.Services
 {

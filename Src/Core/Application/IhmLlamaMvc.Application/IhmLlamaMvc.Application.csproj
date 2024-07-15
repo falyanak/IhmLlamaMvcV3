@@ -18,4 +18,17 @@
 	  <ProjectReference Include="..\..\..\SharedKernel\IhmLlamaMvc.SharedKernel\IhmLlamaMvc.SharedKernel.csproj" />
 	  <ProjectReference Include="..\..\Domain\IhmLlamaMvc.Domain\IhmLlamaMvc.Domain.csproj" />
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="UseCases\Agents\Queries\" />
+	  <Folder Include="UseCases\Conversations\Commands\" />
+	  <Folder Include="UseCases\Conversations\Queries\" />
+	  <Folder Include="UseCases\IaModels\Commands\" />
+	  <Folder Include="UseCases\IaModels\Queries\" />
+	  <Folder Include="UseCases\Questions\Commands\" />
+	  <Folder Include="UseCases\Questions\Queries\" />
+	  <Folder Include="UseCases\Reponses\Commands\" />
+	  <Folder Include="UseCases\Reponses\Queries\" />
+	</ItemGroup>
 </Project>

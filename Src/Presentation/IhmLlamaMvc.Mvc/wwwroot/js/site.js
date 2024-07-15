@@ -4,9 +4,9 @@
 // Write your JavaScript code.
 
 function displayBusyIndicator() {
-    $('.loading').show();
+    $('.spinner-border').show();
 }
 
 function hideBusyIndicator() {
-    $('.loading').hide();
+    $('.spinner-border').hide();
 }

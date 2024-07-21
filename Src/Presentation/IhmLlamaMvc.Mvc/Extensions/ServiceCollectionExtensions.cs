@@ -14,6 +14,10 @@ public static class ServiceCollectionExtensions
         logger.Information("Ajout des services d'infrastructure");
         AddApplicationSettings(services, configuration, logger);
 
+        WebApi.Extensions.ServiceCollectionExtensions.AddWebApiAccessServices(services, configuration, logger);
+       
+        Authorization.Extensions.ServiceCollectionExtensions.AddAuthorization(services, configuration, logger);
+
         CacheManager.Extensions.ServiceCollectionExtensions.AddCacheInfrastructure(services, configuration, logger);
 
         Persistence.Extensions.ServiceCollectionExtensions.AddPersistenceInfrastructure(services, configuration, logger);

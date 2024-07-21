@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IhmLlamaMvc.Mvc.Controllers
 {
-    public partial class HomeController : Controller
+    public partial class HomeController
     {
         [HttpPost]
         public async Task<IActionResult> GetAnswer([FromBody] CreerQuestionRequete requete)

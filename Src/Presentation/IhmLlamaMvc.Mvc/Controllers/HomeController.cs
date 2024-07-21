@@ -1,26 +1,33 @@
 using System.Diagnostics;
+using FluentValidation;
+using IhmLlamaMvc.Application.Configurations;
+using IhmLlamaMvc.Mvc.Constants;
+using IhmLlamaMvc.Mvc.Extensions;
 using IhmLlamaMvc.Mvc.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using ReferentielAPI.Entites;
+using SiccrfAuthorization.Nuget.Interfaces;
+using SiccrfWebApiAccess.Nuget.Interfaces;
 
 namespace IhmLlamaMvc.Mvc.Controllers
 {
-    // bidoullage pour faire fonctionner les requetes json depuis JS
-    public class Requete
-    {
-        public string question { get; set; }
-    }
 
-    public partial class HomeController : Controller
+    public partial class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly ISender _sender;
 
-        public HomeController(ILogger<HomeController> logger,
-            ISender sender)
+        public HomeController(
+            ILogger<HomeController> log,
+            IWebHostEnvironment webEnvironement,
+            IHttpContextAccessor httpContextAccessor,
+            IOptions<ApplicationSettings> applicationSettings,
+            ISiccrfAuthorizationService siccrfAuthorizationService,
+            IWebApiAccessService webapiAccessService,
+            ISender sender
+        )
+            : base(siccrfAuthorizationService, log, applicationSettings, sender)
         {
-            _logger = logger;
-            _sender = sender;
         }
 
         public IActionResult Index()
@@ -39,11 +46,17 @@ namespace IhmLlamaMvc.Mvc.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult ShowIaPrompt()
+        public async Task<IActionResult> ShowIaPrompt()
         {
-            return View();
-        }
+            await GetProfilAgent();
 
-        
+            var agentPermissions = (AgentPermissions)HttpContext.Session.GetJson<AgentPermissions>(
+                Constantes.SessionKeyInfosUser);
+            {
+                return View(agentPermissions);
+            }
+
+
+        }
     }
 }

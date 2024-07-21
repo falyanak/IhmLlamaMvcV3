@@ -6,9 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
 	<ItemGroup>
 		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
-		<PackageReference Include="SiccrfWebApiAccessArchi2" Version="6.0.1" />
+		<PackageReference Include="SiccrfAuthorizationArchi2" Version="6.0.1" />
+		<PackageReference Include="SiccrfAuthorizationArchi2.RefApiProvider" Version="6.0.0" />
 	</ItemGroup>
 
 </Project>

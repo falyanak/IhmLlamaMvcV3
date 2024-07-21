@@ -25,9 +25,11 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\Application\IhmLlamaMvc.Application\IhmLlamaMvc.Application.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Authorization\IhmLlamaMvcV1.Authorization\IhmLlamaMvc.Authorization.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\CacheManager\IhmLlamaMvc.CacheManager\IhmLlamaMvc.CacheManager.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\IaModelProviders\IhmLlamaMvc.IaModelLlamaProvider\IhmLlamaMvc.IaModelLlamaProvider.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\Persistence\IhmLlamaMvc.Persistence\IhmLlamaMvc.Persistence.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\WebApi\IhmLlamaMvc.WebApi\IhmLlamaMvc.WebApi.csproj" />
 	</ItemGroup>
 
 </Project>

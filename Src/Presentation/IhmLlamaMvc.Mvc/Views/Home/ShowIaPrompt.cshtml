@@ -1,6 +1,13 @@
-﻿<div class="navbar">
+﻿@model ReferentielAPI.Entites.AgentPermissions;
+
+@{
+    var nom = Model.Nom;
+    var prenom = Model.Prenom;
+}
+
+<div class="navbar">
     <h1>IHM LLAMA3</h1>
-</div>
+ </div>
 
 <div class="sidebar" id="mySidebar">
     <button id="resetButton" class="reset">Réinitialiser la conversation</button>
@@ -9,7 +16,7 @@
 </div>
 
 <div class="main-content">
-    <h4>Posez votre question :</h4>
+    <h5>Bonjour @prenom @nom, posez votre question :</h5>
     <form id="searchForm">
         <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
         <button type="submit" class="recherche" id="rechercher">Rechercher</button>

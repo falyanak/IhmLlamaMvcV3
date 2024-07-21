@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using IhmLlamaMvc.Mvc.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IhmLlamaMvc.Mvc.Controllers
@@ -13,10 +14,13 @@ namespace IhmLlamaMvc.Mvc.Controllers
     public partial class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ISender _sender;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            ISender sender)
         {
             _logger = logger;
+            _sender = sender;
         }
 
         public IActionResult Index()

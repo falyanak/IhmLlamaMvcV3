@@ -1,6 +1,4 @@
-﻿using IhmLlamaMvc.Domain.Entites;
-using IhmLlamaMvc.Domain.Entites.Conversations;
-using Microsoft.CodeAnalysis.CSharp;
+﻿using IhmLlamaMvc.Domain.Entites.Conversations;
 
 namespace IhmLlamaMvc.Application.Interfaces
 {
@@ -8,6 +6,6 @@ namespace IhmLlamaMvc.Application.Interfaces
     {
         public Conversation DemarrerConversation();
         public void TerminerConversation(Conversation conversation);
-        public string GetAnswer(string question);
+        public  Task<string> GetAnswer(string question);
     }
 }

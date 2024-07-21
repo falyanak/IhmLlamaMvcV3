@@ -6,13 +6,28 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\css\ShowIaPrompt.css" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+		<PackageReference Include="BuildBundlerMinifier2022" Version="2.9.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.7" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Context" Version="4.6.5" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.7" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BlazorFluentUI.CoreComponents" Version="8.0.0" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.15.1" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Application\IhmLlamaMvc.Application\IhmLlamaMvc.Application.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\CacheManager\IhmLlamaMvc.CacheManager\IhmLlamaMvc.CacheManager.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\IaModelProviders\IhmLlamaMvc.IaModelLlamaProvider\IhmLlamaMvc.IaModelLlamaProvider.csproj" />
+	  <ProjectReference Include="..\..\Infrastructure\Persistence\IhmLlamaMvc.Persistence\IhmLlamaMvc.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

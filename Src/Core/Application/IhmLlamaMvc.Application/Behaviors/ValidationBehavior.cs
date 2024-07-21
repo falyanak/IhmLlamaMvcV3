@@ -9,10 +9,10 @@ namespace IhmLlamaMvc.Application.Behaviors;
 /// </summary>
 /// <typeparam name="TRequest">The request type.</typeparam>
 /// <typeparam name="TResponse">The response type.</typeparam>
-public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
-    public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators;
     }
@@ -37,6 +37,6 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
                 throw new ValidationException(failures);
             }
         }
-        return await next();
+        return await next().ConfigureAwait(false);
     }
 }

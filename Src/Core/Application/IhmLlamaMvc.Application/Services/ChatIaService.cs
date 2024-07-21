@@ -6,6 +6,14 @@ namespace IhmLlamaMvc.Application.Services
 {
     public class ChatIaService : IChatIaService
     {
+        private readonly ICallIaModel _callIaModel;
+
+        public ChatIaService(
+            ICallIaModel callIaModel)
+        {
+            _callIaModel = callIaModel;
+        }
+
         public Conversation DemarrerConversation()
         {
             throw new NotImplementedException();
@@ -16,9 +24,9 @@ namespace IhmLlamaMvc.Application.Services
             throw new NotImplementedException();
         }
 
-        string IChatIaService.GetAnswer(string question)
+        public async Task<string> GetAnswer(string question)
         {
-            throw new NotImplementedException();
+            return await _callIaModel.GetAnswer(question);
         }
     }
 }

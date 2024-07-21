@@ -1,27 +1,120 @@
-var builder = WebApplication.CreateBuilder(args);
+using IhmLlamaMvc.Application.Extensions;
+using IhmLlamaMvc.Mvc.Extensions;
+using IhmLlamaMvc.Mvc.Middleware;
+using IhmLlamaMvc.Persistence.Extensions;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+using Serilog;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+// Logger pour la phase de build dans un fichier dédié
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+try
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    Log.Information("starting server.");
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddControllersWithViews();
+    //.AddNewtonsoftJson(
+    //o=>o.SerializerSettings
+    //    .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+    // SonarQube ajout SSL/TLS
+    // authentification
+    // Add services to the container.
+    builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+        .AddNegotiate();
+    //   builder.Services.AddAuthentication();
+
+    builder.Services.AddAuthorization(options =>
+    {
+        // By default, all incoming requests will be authorized according to the default policy.
+        options.FallbackPolicy = options.DefaultPolicy;
+    });
+
+    builder.Services.AddRazorPages();
+
+    
+    // installation Serilog
+    builder.Host.UseSerilog((context, loggerConfiguration) =>
+    {
+        loggerConfiguration.WriteTo.Console();
+        loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+    });
+
+    // Injecter les services d'infrastructure de l'application
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration, Log.Logger);
+
+    //*********************** SICCRF IhmLlamaMvcV1 Configuration *******************************
+
+
+    // Add services to the container.
+
+    // gestion des sessions
+    builder.Services.AddSession(options =>
+    {
+        options.Cookie.Name = ".IhmLlamaMvcV1.Session";
+        // ce paramètre est essentiel pour utiliser le cache pour Siccrf.Authorization
+        options.Cookie.IsEssential = true;
+        // IdleTimeout indique la durée pendant laquelle la session peut être inactive
+        // avant que son contenu soit abandonné.
+        // Chaque accès à la session réinitialise le délai d’expiration.
+        // Ce paramètre s’applique uniquement au contenu de la session, et non au cookie.
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+    });
+
+    var app = builder.Build();
+
+    //*********************** SICCRF ProfilPlus Configuration *******************************
+    //await app.BuildPermanentCachedDataAsync(Log.Logger);
+    //*********************** SICCRF ProfilPlus Configuration *******************************
+
+
+    // Configure the HTTP request pipeline.
+    app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+
+    // https://kendaleiv.com/setting-regex-timeout-globally-using-dotnet-6_0-with-csharp/
+    // Regular expressions could be used by an attacker to launch
+    // a denial-of-service attack for a website by consuming excessive resources.
+    // Setting a timeout allows the operation to stop at a configured timeout,
+    // rather than running until completion, using resources the entire time.
+    // configuration du timeout pour toutes les expressions régulières
+
+    //AppDomain.CurrentDomain.SetData("REGEX_DEFAULT_MATCH_TIMEOUT", TimeSpan.FromSeconds(2));
+
+    // ligne à activer pour tracer les requêtes HTTP
+    //  app.UseSerilogRequestLogging();
+
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+
+    app.UseCookiePolicy();
+    app.UseSession();
+
+    app.UseRouting();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=ShowIaPrompt}/{id?}");
+
+    app.Run();
+
+    Log.Information("L'application a été configurée et lancée.");
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Fin inattendue de la phase de démarrage !");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=ShowIaPrompt}/{id?}");
-
-app.Run();

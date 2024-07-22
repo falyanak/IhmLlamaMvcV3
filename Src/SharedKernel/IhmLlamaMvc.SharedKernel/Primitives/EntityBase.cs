@@ -1,4 +1,6 @@
-﻿namespace IhmLlamaMvc.SharedKernel.Primitives;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace IhmLlamaMvc.SharedKernel.Primitives;
 
 /// <summary>
 /// Represents the base class that all entities derive from.

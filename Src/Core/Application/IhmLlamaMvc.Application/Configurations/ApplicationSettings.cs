@@ -21,7 +21,7 @@ public class ApplicationSettings
     public string EmailDeveloppeur { get; set; } = "";
 
     public string? Mode { get; set; }
-    public string? ConnectionString { get; set; }
+    public List<string>? ConnectionString { get; set; }
 
     public string? MentionsLegales { get; set; }
     public string? ApplicationVersion { get; set; }

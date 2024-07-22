@@ -18,7 +18,7 @@ namespace IhmLlamaMvc.Application.UseCases.Agents.Commands
         public async Task<Result<Agent>> Handle(CreerAgentRequete request,
             CancellationToken cancellationToken)
         {
-            var agent = new Agent(request.Nom, request.Prenom);
+            var agent = new Agent(request.Nom, request.Prenom, request.LoginWindows);
 
             var creationAgent = await _agentRepository.CreerAgent(agent);
   

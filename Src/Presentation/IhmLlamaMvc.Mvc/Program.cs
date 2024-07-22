@@ -1,8 +1,10 @@
 using IhmLlamaMvc.Application.Extensions;
 using IhmLlamaMvc.Mvc.Extensions;
 using IhmLlamaMvc.Mvc.Middleware;
+using IhmLlamaMvc.Persistence.EF;
 using IhmLlamaMvc.Persistence.Extensions;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 // Logger pour la phase de build dans un fichier dédié
@@ -36,7 +38,7 @@ try
 
     builder.Services.AddRazorPages();
 
-    
+
     // installation Serilog
     builder.Host.UseSerilog((context, loggerConfiguration) =>
     {
@@ -66,6 +68,13 @@ try
         // Ce paramètre s’applique uniquement au contenu de la session, et non au cookie.
         options.IdleTimeout = TimeSpan.FromMinutes(30);
     });
+
+    // Add a database provider (import the Microsoft.EntityFrameworkCore namespace!)
+    builder.Services.AddDbContext<ChatIaContext>(options =>
+    {
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        options.UseSqlServer(connectionString);
+    }, ServiceLifetime.Singleton);
 
     var app = builder.Build();
 
@@ -103,6 +112,12 @@ try
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=ShowIaPrompt}/{id?}");
+
+
+    // migration
+    //await using var scope = app.Services.CreateAsyncScope();
+    //await using var db = scope.ServiceProvider.GetService<ChatIaContext>();
+    //await db.Database.MigrateAsync();
 
     app.Run();
 

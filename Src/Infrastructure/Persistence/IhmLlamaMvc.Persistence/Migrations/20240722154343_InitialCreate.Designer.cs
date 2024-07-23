@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IhmLlamaMvc.Persistence.Migrations
 {
-    [DbContext(typeof(ChatIaContext))]
+    [DbContext(typeof(ChatIaDbContext))]
     [Migration("20240722154343_InitialCreate")]
     partial class InitialCreate
     {

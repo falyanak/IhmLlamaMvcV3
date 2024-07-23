@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IhmLlamaMvc.Domain.Entites.IaModels.ModeleIA
+
+@{
+
+    var listeModelesIA = (IEnumerable<SelectListItem>)ViewData["ModelesIA"];
+}
+
+<div class="navbar">
+    <h1>Conversation avec LLM LLAMA3</h1>
+    <br/>
+    <h6 class="me-0">Bonjour @ViewData["UserInfos"]</h6>
+ </div>
+
+<div class="sidebar" id="mySidebar">
+    <button id="resetButton" class="reset">Réinitialiser la conversation</button>
+    <a href="#">Historique</a>
+    <a href="#">requête 1</a>
+</div>
+
+<div class="main-content">
+    
+    <div class="mb-3 center">
+        <span>Modèles IA disponibles</span>
+        <select asp-for="Libelle" asp-items="@listeModelesIA">
+            <option value="">All</option>
+        </select>
+    </div>
+    
+
+    <h5>Posez votre question :</h5>
+    <form id="searchForm">
+        <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
+        <button type="submit" class="recherche" id="rechercher">Rechercher</button>
+    </form>
+
+    <partial name="_BusyIndicatorPartial"/>
+
+    <textarea class="resultat" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
+
+    <h4>Historique des entrées</h4>
+    <div class="historique">
+        <ul id="historyList"></ul>
+    </div>
+</div>
+
+<script src="~/js/ShowIaprompt.js"></script>
+

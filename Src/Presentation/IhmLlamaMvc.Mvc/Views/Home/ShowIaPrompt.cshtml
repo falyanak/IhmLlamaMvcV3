@@ -1,36 +1,66 @@
-﻿@model ReferentielAPI.Entites.AgentPermissions;
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IhmLlamaMvc.Domain.Entites.IaModels.ModeleIA
 
 @{
-    var nom = Model.Nom;
-    var prenom = Model.Prenom;
+    var listeModelesIA = (IEnumerable<SelectListItem>)ViewData["ModelesIA"];
 }
 
-<div class="navbar">
-    <h1>IHM LLAMA3</h1>
- </div>
+<div class="left-sidebar-grid">
+    <header class="header">
+        <div class='grid'>
+            <p class="left">This is on the left </p>
+            <p class="center">Conversation avec LLM LLAMA3</p>
+            <p class="right">Bonjour @ViewData["UserInfos"]</p>
+        </div>
+    </header>
 
-<div class="sidebar" id="mySidebar">
-    <button id="resetButton" class="reset">Réinitialiser la conversation</button>
-    <a href="#">Historique</a>
-    <a href="#">requête 1</a>
+    <main class="main-content">
+
+        <div class="mb-3 center">
+            <span>Modèles IA disponibles</span>
+            <select asp-for="Libelle" asp-items="@listeModelesIA">
+                <option value="">All</option>
+            </select>
+        </div>
+
+        <h2>Posez votre question :</h2>
+
+        <form id="searchForm">
+            <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
+            <br />
+            <div style="margin-left: 10px; ;">
+                <button type="submit" id="rechercher">Rechercher</button>
+            </div>
+
+        </form>
+
+        <partial name="_BusyIndicatorPartial" />
+
+
+        <textarea class="resultat" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
+
+    </main>
+    <section class="left-sidebar">
+        <button id="resetButton" class="reset" class="haha">Réinitialiser la conversation</button>
+        <ul>
+            <li>
+                <a href="#">Historique</a>
+
+            </li>
+            <li>
+                <a href="#">requête 1</a>
+            </li>
+        </ul>
+
+
+    </section>
+    <footer class="footer">
+        <h3 class="mt-4">Historique des entrées</h3>
+        <div style="   border: 1px solid #ccc;">
+            <ul id="historyList" class="list-group"></ul>
+        </div>
+
+    </footer>
 </div>
-
-<div class="main-content">
-    <h5>Bonjour @prenom @nom, posez votre question :</h5>
-    <form id="searchForm">
-        <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
-        <button type="submit" class="recherche" id="rechercher">Rechercher</button>
-    </form>
-
-    <partial name="_BusyIndicatorPartial" />
-
-    <textarea class="resultat" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
-
-    <h4>Historique des entrées</h4>
-    <div class="historique">
-        <ul id="historyList"></ul>
-    </div>
-</div>
-
 <script src="~/js/ShowIaprompt.js"></script>
 

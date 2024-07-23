@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using IhmLlamaMvc.Application.Interfaces.Dal;
 using IhmLlamaMvc.Domain.Entites.Agents;
+using IhmLlamaMvc.Domain.Entites.IaModels;
 using IhmLlamaMvc.Persistence.Constants;
 using IhmLlamaMvc.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +39,10 @@ public static class ServiceCollectionExtensions
         // injection du repository Agent
         services.AddScoped<IAgentRepository, AgentRepository>();
 
-     
+        // injection du repository ModeleIA
+        services.AddScoped<IModelIARepository, ModelIARepository>();
+
+
     }
 
     /// <summary>

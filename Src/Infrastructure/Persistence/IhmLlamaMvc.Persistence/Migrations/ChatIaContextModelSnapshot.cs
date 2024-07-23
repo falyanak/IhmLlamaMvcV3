@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IhmLlamaMvc.Persistence.Migrations
 {
-    [DbContext(typeof(ChatIaContext))]
+    [DbContext(typeof(ChatIaDbContext))]
     partial class ChatIaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

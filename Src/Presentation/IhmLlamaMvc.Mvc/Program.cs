@@ -6,6 +6,7 @@ using IhmLlamaMvc.Persistence.Extensions;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Configuration;
 
 // Logger pour la phase de build dans un fichier dédié
 Log.Logger = new LoggerConfiguration()
@@ -70,9 +71,19 @@ try
     });
 
     // Add a database provider (import the Microsoft.EntityFrameworkCore namespace!)
-    builder.Services.AddDbContext<ChatIaContext>(options =>
+    builder.Services.AddDbContext<ChatIaDbContext>(options =>
     {
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        // avec plusieurs chaines connections
+        var connectionString =
+            builder.Configuration["ApplicationSettings:ConnectionStrings:DefaultConnection2"]
+             ?? throw new InvalidOperationException(
+                "Chaine de connexion à la base de données non trouvée !");
+
+        // avec une seule chaine de connexion
+        //var connectionString = builder.Configuration
+        //    .GetConnectionString("DefaultConnection")
+        //      ?? throw new InvalidOperationException("Chaine de connexion à la base de données non trouvée !");
+
         options.UseSqlServer(connectionString);
     }, ServiceLifetime.Singleton);
 

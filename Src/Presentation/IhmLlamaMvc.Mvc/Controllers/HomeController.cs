@@ -1,22 +1,23 @@
-using System.Diagnostics;
-using FluentValidation;
 using IhmLlamaMvc.Application.Configurations;
+using IhmLlamaMvc.Application.UseCases.IaModels.Queries;
+using IhmLlamaMvc.Domain.Entites.IaModels;
 using IhmLlamaMvc.Mvc.Constants;
 using IhmLlamaMvc.Mvc.Extensions;
 using IhmLlamaMvc.Mvc.Models;
+using IhmLlamaMvc.SharedKernel.Primitives.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using ReferentielAPI.Entites;
 using SiccrfAuthorization.Nuget.Interfaces;
 using SiccrfWebApiAccess.Nuget.Interfaces;
+using System.Diagnostics;
 
 namespace IhmLlamaMvc.Mvc.Controllers
 {
-
     public partial class HomeController : BaseController
     {
-
         public HomeController(
             ILogger<HomeController> log,
             IWebHostEnvironment webEnvironement,
@@ -52,11 +53,18 @@ namespace IhmLlamaMvc.Mvc.Controllers
 
             var agentPermissions = (AgentPermissions)HttpContext.Session.GetJson<AgentPermissions>(
                 Constantes.SessionKeyInfosUser);
-            {
-                return View(agentPermissions);
-            }
 
+            ViewData["UserInfos"] = $"{agentPermissions.Prenom} {agentPermissions.Nom}";
 
+            var listeModelesIA = await _sender.Send(new ListerModelesIAQuery());
+
+            IEnumerable<SelectListItem> listeFormatee = ConstruireListeFormateeModelesIA(listeModelesIA);
+
+            ViewData["ModelesIA"] = listeFormatee;
+
+            return View();
         }
+
+
     }
 }

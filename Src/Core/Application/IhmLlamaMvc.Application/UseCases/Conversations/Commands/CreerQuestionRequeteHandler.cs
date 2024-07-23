@@ -1,8 +1,7 @@
 ﻿using IhmLlamaMvc.Application.Interfaces;
-using IhmLlamaMvc.Application.UseCases.Conversations.Commands;
 using MediatR;
 
-namespace IhmLlamaMvc.Application.UseCases.Agents.Commands
+namespace IhmLlamaMvc.Application.UseCases.Conversations.Commands
 {
     public sealed class CreerQuestionRequeteHandler :
         IRequestHandler<CreerQuestionRequete, string>

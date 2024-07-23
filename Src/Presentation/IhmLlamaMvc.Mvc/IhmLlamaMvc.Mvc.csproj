@@ -38,4 +38,11 @@
 	  <ProjectReference Include="..\..\Infrastructure\WebApi\IhmLlamaMvc.WebApi\IhmLlamaMvc.WebApi.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="Views\Home\ShowIaPrompt.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
 </Project>

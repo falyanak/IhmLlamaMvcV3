@@ -1,166 +1,89 @@
 ﻿body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+    background-color: GrayText;
+}
+/* grid container */
+.left-sidebar-grid {
+    display: grid;
+    grid-template-areas:
+        'header'
+        'left-sidebar'
+        'main-content'
+        'footer';
 }
 
-.navbar {
-    display: flex;
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-    .navbar h1 {
-        margin: 0;
+    /* general column padding */
+    .left-sidebar-grid > * {
+        padding: 1rem;
     }
 
-.sidebar {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #222;
-    overflow-x: hidden;
-    padding-top: 20px;
-    border: 1px solid #ccc;
-    border-color: #111;
-}
-
-    .sidebar a {
-        padding: 10px 15px;
-        text-decoration: none;
-        font-size: 18px;
+    /* assign columns to grid areas */
+    .left-sidebar-grid > .header {
+        grid-area: header;
+        background-color: #333;
         color: white;
-        display: block;
-        transition: 0.3s;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
     }
 
-        .sidebar a:hover {
-            background-color: #575757;
-        }
+    .left-sidebar-grid > .main-content {
+        grid-area: main-content;
+        background: #fff;
+    }
 
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-}
+    .left-sidebar-grid > .left-sidebar {
+        grid-area: left-sidebar;
+        background-color: lightgrey;
+    }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+    .left-sidebar-grid > .footer {
+        grid-area: footer;
+        background: yellow;
+    }
 
 textarea {
-    position: relative;
     padding: 10px;
+    margin: 10px;
     box-sizing: border-box;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 20px;
     max-width: 90%;
     height: 40%;
     width: 80%;
     resize: none;
 }
 
-button.recherche {
-    padding: 10px;
-    margin: 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 120px;
+/* alignement dans le header*/
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-button.reset {
-    padding: 20px;
-    background-color: #222;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: -0.7rem;
-    font-size: 17px
+.center {
+    text-align: center;
 }
 
-.historique {
-    padding: 10px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    max-width: 90%;
-    height: 30%;
-    width: 80%;
+.right {
+    text-align: right;
 }
 
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
+.left {
+    text-align: left;
+}
+/*.left >p {
 
-        .sidebar a {
-            float: left;
-        }
+}
+*/
+/* tablet breakpoint */
 
-    .main-content {
-        margin-left: 0;
-    }
-
-
-    .mt-4 {
-        margin-top: 1.5rem;
-    }
-
-    .list-group-item {
-        list-style-type: none;
-        padding: 10px;
-        border: 1px solid #ddd;
-        margin-top: 5px;
+@media (min-width:768px) {
+    .left-sidebar-grid {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 100px 500px;
+        grid-template-areas:
+            'header header header header header'
+            'left-sidebar main-content main-content main-content main-content'
+            'left-sidebar footer footer footer footer';
     }
 }
-
-.bas {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.sortie {
-}
-
-    .sortie #results {
-        display: flex;
-        position: relative;
-        flex-direction: row;
-    }
-
-/*
-#animChargement {
-    margin-left: 20px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3498db;
-    border-left: 3px solid #3498db;
-    border-radius: 70%;
-    max-width: 40px;
-    max-height: 40px;
-    animation: spin 3s linear infinite;
-    display: none;
-}
-
-@keyframes spin {
-    50% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}*/

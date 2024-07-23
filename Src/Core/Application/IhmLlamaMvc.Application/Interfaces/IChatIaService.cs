@@ -1,4 +1,6 @@
 ﻿using IhmLlamaMvc.Domain.Entites.Conversations;
+using IhmLlamaMvc.Domain.Entites.IaModels;
+using IhmLlamaMvc.SharedKernel.Primitives.Result;
 
 namespace IhmLlamaMvc.Application.Interfaces
 {
@@ -7,5 +9,7 @@ namespace IhmLlamaMvc.Application.Interfaces
         public Conversation DemarrerConversation();
         public void TerminerConversation(Conversation conversation);
         public  Task<string> GetAnswer(string question);
+
+        public Task<Result<IReadOnlyList<ModeleIA>>> ListerModelesIA();
     }
 }

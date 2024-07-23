@@ -17,7 +17,6 @@
 	  <Folder Include="UseCases\Agents\Queries\" />
 	  <Folder Include="UseCases\Conversations\Queries\" />
 	  <Folder Include="UseCases\IaModels\Commands\" />
-	  <Folder Include="UseCases\IaModels\Queries\" />
 	  <Folder Include="UseCases\Questions\Commands\" />
 	  <Folder Include="UseCases\Questions\Queries\" />
 	  <Folder Include="UseCases\Reponses\Commands\" />

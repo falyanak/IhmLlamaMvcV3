@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using IhmLlamaMvc.Application.Extensions;
-using IhmLlamaMvc.Application.UseCases.Conversations.Commands;
 using IhmLlamaMvc.Application.Validation;
 
-namespace IhmLlamaMvc.Application.UseCases.Agents.Commands;
+namespace IhmLlamaMvc.Application.UseCases.Conversations.Commands;
 
 /// <summary>
 /// Représente le validateur de la classe  <see cref="CreerDemandeCommand"/>.

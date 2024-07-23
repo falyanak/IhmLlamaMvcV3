@@ -1,13 +1,11 @@
 ﻿using IhmLlamaMvc.Application.Configurations;
+using IhmLlamaMvc.Mvc.Constants;
+using IhmLlamaMvc.Mvc.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualStudio.TextTemplating;
 using ReferentielAPI.Entites;
 using SiccrfAuthorization.Nuget.Interfaces;
-using System.Diagnostics;
-using IhmLlamaMvc.Mvc.Constants;
-using IhmLlamaMvc.Mvc.Extensions;
 
 namespace IhmLlamaMvc.Mvc.Controllers;
 

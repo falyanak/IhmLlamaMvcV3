@@ -2,120 +2,239 @@ window.onload = function () {
     //    alert("onload")
     hideBusyIndicator();
     // Écouteur d'événement pour le bouton de réinitialisation
-    document.getElementById("resetButton").addEventListener("click", function () {
-        resetConversation();
-    });
-    document.getElementById("searchForm").addEventListener("submit", function (event) {
-        postData(event);
+    document.getElementById("resetButton").addEventListener("click", function () { resetConversation(); });
+    document.getElementById("searchForm").addEventListener("submit", function (event) { postData(event); });
+
+    const textareas = document.querySelectorAll("textarea");
+    //  var test = document.querySelectorAll('input[value][type="checkbox"]:not([value=""])
+
+    const questions = document.querySelectorAll(".questionclass");
+    console.log(questions);
+
+    const reponses = document.querySelectorAll(".reponseclass");
+    console.log(reponses);
+
+    textareas.forEach(function (i) {
+        i.addEventListener('input', function () {
+            console.log("on input");
+            setDynamicHeight(this);
+        });
     });
 
-    document.getElementById("listemodeles").addEventListener("change", function (event) {
-        changeTitle(event);
-    });
-
-
-    requete.focus()
+    //textareas.forEach(function (i) {
+    //    i.addEventListener('change', function () {
+    //        console.log("on change");
+    //        setDynamicHeight(this);
+    //    });
+    //});
+    clearSessionStorage();
+    storeObjectInSessionStorage(QUESTION_VALEUR_MAX_ID, 0);
+    storeObjectInSessionStorage(REPONSE_VALEUR_MAX_ID, 0);
+  
+    Question.focus()
 };
 
-
-// envoi de la question au serveur Paolo
-
+// envoyer les données du formulaire au serveur
 async function postData(event) {
 
     event.preventDefault();
 
-    const element = document.getElementById("requete");
-    const queryInput = element.value;
-    console.log(queryInput);
+    // empêcher la saisie pendant la soumission du formulaire
+    preventInputData(true);
 
-    element.disabled = true;
+    // afficher le sablier
+    showBusyIndicator();
 
-    addEntryToHistory(queryInput);
+    const f = document.getElementById("searchForm");
+    const formData = new FormData(f);
+    console.log(formData);
 
-    const postdata = { question: queryInput };
+    const url = $('#mapconversation').data('url-soumettre-formulaire-link');
 
-    // afficher l'indicateur de chargement
-    displayBusyIndicator();
+    var errorResponse;
 
-    let request = {
-        method: 'POST',
-        body: JSON.stringify(postdata),
-        headers: {
-            "content-type": 'application/json; charset=UTF-8',
-        },
-    };
-    const reponse = await fetch('/Home/GetAnswer', request);
-    const json = await reponse.json(); //récupère la rep de l'ia
-    console.log(json);
-    element.disabled = false;
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData
+        });
 
-    // cacher l'indicateur de chargement
-    hideBusyIndicator();
+        const result = await response.json();
+        console.log("Success:", result);
 
-    successFunc(json);
-}
+        if (!response.ok) {
+            errorResponse = result;
+            throw new Error("Une erreur s'est produite !");
+        }
 
-function successFunc(data) {
-    document.getElementById("Output").value = data;
+  //      alert(result);
+
+        // rendre l'IHM disponible pour la saisie
+        preventInputData(false);
+
+        // cacher l'indicateur de chargement
+        hideBusyIndicator();
+
+        // afficher la question
+        showQuestion();
+
+        // afficher la réponse
+        showResponse(result);
+
+        document.getElementById("Question").value = "";
+
+
+    } catch (error) {
+        console.log("Error:", error);
+
+        //extraire les erreurs au format object{ code: string, message : string }
+        if (errorResponse && errorResponse.errors) {
+            const errorList = errorResponse.errors;
+            showAlert("Une erreur est survenue", "message", "danger", errorList,
+                { autoClose: false })
+        }
+        else {
+            const errorList = [{ code: "Une erreur s'est produite", message: error }];
+            showAlert("Une erreur est survenue", "message", "danger", errorList,
+                { autoClose: false })
+        }
+    }
 }
 
 function errorFunc() {
     alert('error');
 }
 
-function addEntryToHistory(entry) {
-    const historyList = document.getElementById("historyList");
-    const newEntry = document.createElement("li");
-    // newEntry.className = "list-group-item";
-    newEntry.textContent = entry;
-    historyList.appendChild(newEntry);
-}
-
-
 function resetConversation() {
     // Vide la zone de texte
-    document.getElementById("requete").value = "";
+    document.getElementById("Question").value = "";
+    document.getElementById("Question").style.height = "10%";
 
-    // Vide la liste de l'historique
-    document.getElementById("historyList").innerHTML = "";
-
-    // Vide la sortie de l'IA
-    document.getElementById("Output").value = "";
-
-    requete.focus();
-}
-
-function changeTitle(event) {
-    const select = event.target;
-    const value = select.value;
-    console.log(`selection value = ${value}`);
-    const selection = select.options[select.selectedIndex].text;
-
-    console.log(`selection text = ${selection}`);
-
-  //  autoriserSaisieIhm(true);
-
-    if (value == "0") {
-        console.log(`value == '0'`);
-        interdireSaisieIhm(true);
-        document.getElementById("headerlabel").innerHTML = "Sélectionner un modèle";
+    // efface les questions et réponses
+    const parent = document.getElementById("showQuestionAnswer");
+    while (parent.firstChild) {
+        parent.firstChild.remove()
     }
-    else {
-        interdireSaisieIhm(false);
-        document.getElementById("headerlabel").innerHTML = "Conversation avec " + selection;
-    }
-   
+
+    document.getElementById("Question").focus();
 }
 
-function interdireSaisieIhm(accessibilite = false) {
-    console.log(`accessibilite IHM = ${accessibilite}`);
-    resetConversation();
-    document.getElementById("requete").disabled = accessibilite;
-    document.getElementById("rechercher").disabled = accessibilite;
+function preventInputData(actionValue = false) {
+    console.log(`accessibilite IHM = ${actionValue}`);
+
+    document.getElementById("Question").readOnly = actionValue;
+    document.getElementById("rechercher").readOnly = actionValue;
+}
+
+function setDynamicHeight(element) {
+    element.style.height = 0; // set the height to 0 in case of it has to be shrinked
+    element.style.height = element.scrollHeight + 'px'; // set the dynamic height
 }
 
 
+function showResponse(data) {
+
+    const nextId = getReponseMaxId();
+
+    const dataWithPrefix = `IA : ${data}`;
+    createTextareaAnswer(nextId, dataWithPrefix);
+
+    const id = `reponseId-${nextId}`;
+
+    const answer = document.getElementById(id);
+
+    alert(answer.name);
+
+    setDynamicHeight(answer);
+
+    answer.value = data;
+}
 
 
+function getReponseMaxId() {
+    let id = restoreObjectInSessionStorage(REPONSE_VALEUR_MAX_ID);
+    console.log(`getReponseMaxId = ${id}`);
+
+    id = parseInt(id, 10) + 1;
+
+    console.log(`getReponseMaxId après incrément = ${id}`);
+  
+    // stocker la nouvelle valeur
+    storeNewMaxId(REPONSE_VALEUR_MAX_ID, id);
+
+    console.log(`stockage en session de REPONSE_VALEUR_MAX_ID = ${id}`);
+    return id;
+}
 
 
+function createTextareaAnswer(nextId, content) {
+    var input = document.createElement('textarea');
+    input.name = `reponseId-${nextId}`;
+    input.id = `reponseId-${nextId}`;
+
+    input.readOnly = true;
+    input.className = 'reponseclass';
+    input.innerText = content;
+
+    const parent = document.querySelector("#showQuestionAnswer");
+
+    parent.appendChild(input);
+}
+
+
+function createTextareaQuestion(nextId, content) {
+    var input = document.createElement('textarea');
+    input.name = `questionId-${nextId}`;
+    input.id = `questionId-${nextId}`;
+
+    input.readOnly = true;
+    input.className = 'questionclass';
+    input.innerText = content;
+
+    const parent = document.querySelector("#showQuestionAnswer");
+
+    parent.appendChild(input);
+}
+
+function getQuestionMaxId() {
+    let id = restoreObjectInSessionStorage(QUESTION_VALEUR_MAX_ID);
+    console.log(`getQuestionMaxId = ${id}`);
+
+    id = parseInt(id, 10) + 1;
+    console.log(`getQuestionMaxId après incrément = ${id}`);
+
+    // stocker la nouvelle valeur
+    storeNewMaxId(QUESTION_VALEUR_MAX_ID, id);
+
+    console.log(`stockage en session de QUESTION_VALEUR_MAX_ID = ${id}`);
+
+    return id;
+}
+
+function storeNewMaxId(key, valueId) {
+    // stocker la nouvelle valeur
+    storeObjectInSessionStorage(key, valueId);
+}
+
+function showQuestion() {
+
+    const nextId = getQuestionMaxId();
+
+    const data = document.getElementById("Question").value;
+
+    const initiales = document.getElementById("InitialesAgent").value;
+    const dataWithPrefix = `${initiales} : ${data}`;
+
+    createTextareaQuestion(nextId, dataWithPrefix);
+
+    const id = `questionId-${nextId}`;
+
+    const question = document.getElementById(id);
+
+    alert(`question = ${question}`);
+
+    setDynamicHeight(question);
+
+    // recopier question dans nouveau textArea
+    question.value = data;
+}

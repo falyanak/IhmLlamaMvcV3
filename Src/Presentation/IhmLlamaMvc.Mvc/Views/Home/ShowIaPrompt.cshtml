@@ -1,46 +1,47 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model IhmLlamaMvc.Domain.Entites.IaModels.ModeleIA
+﻿@model IhmLlamaMvc.Mvc.ViewModels.Conversation.ConversationViewModel
 
-@{
-    var listeModelesIA = (IEnumerable<SelectListItem>)ViewData["ModelesIA"];
-}
+<input asp-for="InitialesAgent" type="hidden" />
 
 <div class="left-sidebar-grid">
 
     <header class="header">
         <div class='grid'>
             <p class="left">SI - DGCCRF </p>
-            <p id="headerlabel" class="center">Conversation avec LLM LLAMA3</p>
-            <p class="right">Bonjour @ViewData["UserInfos"]</p>
+            <span id="headerlabel" class="center">
+                Conversation avec LLM
+                <select asp-for="ModeleId" asp-items="@Model.listeModeles">
+                </select>
+            </span>
+            <p class="right">Bonjour @Model.IdentiteAgent</p>
         </div>
     </header>
 
     <main class="main-content center">
 
-        <form id="searchForm">
+        @*      <textarea id="Answer" class="reponseclass" placeholder="La réponse de l'IA sera affichée ici :" readonly></textarea>
+        *@
 
 
-            <label for="listemodeles">Posez votre question à &nbsp;</label>
-            <select asp-for="Libelle" asp-items="@listeModelesIA" id="listemodeles">
-                <option value="0">Sélectionnez un modèle</option>
-            </select>
+        <div id="showQuestionAnswer"></div>
+        
+        <div>
+            <partial name="_BusyIndicatorPartial" />
+        </div>
 
+        <form asp-action="PoserQuestion" method="post" id="searchForm" role="form">
 
-            <textarea class="entrer" id="requete"
-                      placeholder="Saisissez votre question ici..." required></textarea>
+            <textarea class="questionclass" asp-for="Question" placeholder="Saisissez votre question ici..."></textarea>
+            <span asp-validation-for="Question" class="text-danger"></span>
             <br />
 
             <button type="submit" id="rechercher">Rechercher</button>
+            <button id="resetButton" type="reset">Réinitialiser</button>
         </form>
-
-        <partial name="_BusyIndicatorPartial" />
-
-        <textarea class="center" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
 
     </main>
 
     <section class="left-sidebar">
-        <button id="resetButton" class="reset" class="haha">Réinitialiser la conversation</button>
+
         <ul>
             <li>
                 <a href="#">Historique</a>
@@ -53,13 +54,10 @@
 
 
     </section>
-    <footer class="footer">
-        <h3 class="mt-4">Historique des entrées</h3>
-        <div style="   border: 1px solid #ccc;">
-            <ul id="historyList" class="list-group"></ul>
-        </div>
+</div>
 
-    </footer>
+<div id="mapconversation"
+     data-url-soumettre-formulaire-link="@Url.Content("~/Home/PoserQuestion")">
 </div>
 <script src="~/js/ShowIaprompt.js"></script>
 

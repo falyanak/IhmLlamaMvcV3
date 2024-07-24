@@ -10,15 +10,20 @@
     <link rel="stylesheet" href="~/css/ShowIaPrompt.css" />
 </head>
 <body>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @* zone d'affichage des alertes créées dynamiquement par la fonction showAlert dans le fichier alerte.js*@
+    <div id="liveAlertPlaceholder"></div>
+
+    @*   <div class="container"> *@
+    <main role="main">
+        @RenderBody()
+    </main>
+    @* </div> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/alerte.min.js"></script>
+    <script src="~/js/localstorage.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

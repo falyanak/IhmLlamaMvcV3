@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-function displayBusyIndicator() {
+function showBusyIndicator() {
     $('.spinner-border').show();
 }
 

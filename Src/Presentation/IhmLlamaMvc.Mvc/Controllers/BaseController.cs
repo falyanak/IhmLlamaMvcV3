@@ -31,12 +31,14 @@ public class BaseController : Controller
     protected async Task<AgentPermissions> GetAgentPermissions() => 
         await _siccrfAuthorizationService.GetAgentAsync();
 
-    protected async Task GetProfilAgent()
+    protected async Task<AgentPermissions> GetInfosAgent()
     {
         var agentPermissions = await GetAgentPermissions();
 
         HttpContext.Session.SetJson<AgentPermissions>(
             Constantes.SessionKeyInfosUser, agentPermissions);
+
+        return agentPermissions;
 
     }
 }

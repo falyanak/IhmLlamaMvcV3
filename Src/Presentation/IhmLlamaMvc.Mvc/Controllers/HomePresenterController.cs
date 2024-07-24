@@ -7,10 +7,9 @@ namespace IhmLlamaMvc.Mvc.Controllers
     public partial class HomeController
     {
         private static IEnumerable<SelectListItem> ConstruireListeFormateeModelesIA(
-            Result<IReadOnlyList<ModeleIA>> listeModelesIA,
-            string modeleParDefaut="Llama" )
+            IReadOnlyList<ModeleIA> listeModelesIA, string modeleParDefaut="Llama" )
         {
-            IEnumerable<SelectListItem> listeFormatee = listeModelesIA.Value
+            IEnumerable<SelectListItem> listeFormatee = listeModelesIA
                 .Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),

@@ -6,40 +6,39 @@
 }
 
 <div class="left-sidebar-grid">
+
     <header class="header">
         <div class='grid'>
-            <p class="left">This is on the left </p>
-            <p class="center">Conversation avec LLM LLAMA3</p>
+            <p class="left">SI - DGCCRF </p>
+            <p id="headerlabel" class="center">Conversation avec LLM LLAMA3</p>
             <p class="right">Bonjour @ViewData["UserInfos"]</p>
         </div>
     </header>
 
-    <main class="main-content">
-
-        <div class="mb-3 center">
-            <span>Modèles IA disponibles</span>
-            <select asp-for="Libelle" asp-items="@listeModelesIA">
-                <option value="">All</option>
-            </select>
-        </div>
-
-        <h2>Posez votre question :</h2>
+    <main class="main-content center">
 
         <form id="searchForm">
-            <textarea class="entrer" id="requete" placeholder="Tapez votre question ici..." required></textarea>
-            <br />
-            <div style="margin-left: 10px; ;">
-                <button type="submit" id="rechercher">Rechercher</button>
-            </div>
 
+
+            <label for="listemodeles">Posez votre question à &nbsp;</label>
+            <select asp-for="Libelle" asp-items="@listeModelesIA" id="listemodeles">
+                <option value="0">Sélectionnez un modèle</option>
+            </select>
+
+
+            <textarea class="entrer" id="requete"
+                      placeholder="Saisissez votre question ici..." required></textarea>
+            <br />
+
+            <button type="submit" id="rechercher">Rechercher</button>
         </form>
 
         <partial name="_BusyIndicatorPartial" />
 
-
-        <textarea class="resultat" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
+        <textarea class="center" id="Output" placeholder="L'IA générera sa réponse ici :" disabled></textarea>
 
     </main>
+
     <section class="left-sidebar">
         <button id="resetButton" class="reset" class="haha">Réinitialiser la conversation</button>
         <ul>

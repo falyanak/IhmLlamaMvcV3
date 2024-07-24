@@ -58,7 +58,8 @@ namespace IhmLlamaMvc.Mvc.Controllers
 
             var listeModelesIA = await _sender.Send(new ListerModelesIAQuery());
 
-            IEnumerable<SelectListItem> listeFormatee = ConstruireListeFormateeModelesIA(listeModelesIA);
+            IEnumerable<SelectListItem> listeFormatee = 
+                ConstruireListeFormateeModelesIA(listeModelesIA);
 
             ViewData["ModelesIA"] = listeFormatee;
 

@@ -7,14 +7,15 @@ namespace IhmLlamaMvc.Mvc.Controllers
     public partial class HomeController
     {
         private static IEnumerable<SelectListItem> ConstruireListeFormateeModelesIA(
-            Result<IReadOnlyList<ModeleIA>> listeModelesIA)
+            Result<IReadOnlyList<ModeleIA>> listeModelesIA,
+            string modeleParDefaut="Llama" )
         {
             IEnumerable<SelectListItem> listeFormatee = listeModelesIA.Value
                 .Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
                     Text = string.Format("{0} version {1}", x.Libelle, x.Version),
-                    Selected = x.Libelle.Contains("LLama")
+                    Selected = x.Libelle.Contains(modeleParDefaut, StringComparison.OrdinalIgnoreCase)
 
                 });
 

@@ -38,7 +38,7 @@
 
     .left-sidebar-grid > .footer {
         grid-area: footer;
-        background: yellow;
+        background: gainsboro;
     }
 
 textarea {
@@ -64,17 +64,27 @@ textarea {
     text-align: center;
 }
 
+p.center {
+    font-size: 1.5vw;
+}
+
 .right {
     text-align: right;
+}
+
+p.right {
+    font-size: 1vw;
 }
 
 .left {
     text-align: left;
 }
-/*.left >p {
 
+p.left {
+    font-size: 1vw;
 }
-*/
+
+
 /* tablet breakpoint */
 
 @media (min-width:768px) {

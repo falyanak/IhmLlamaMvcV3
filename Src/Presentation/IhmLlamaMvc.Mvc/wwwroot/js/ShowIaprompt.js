@@ -9,6 +9,11 @@ window.onload = function () {
         postData(event);
     });
 
+    document.getElementById("listemodeles").addEventListener("change", function (event) {
+        changeTitle(event);
+    });
+
+
     requete.focus()
 };
 
@@ -30,7 +35,7 @@ async function postData(event) {
     const postdata = { question: queryInput };
 
     // afficher l'indicateur de chargement
-     displayBusyIndicator();
+    displayBusyIndicator();
 
     let request = {
         method: 'POST',
@@ -61,7 +66,7 @@ function errorFunc() {
 function addEntryToHistory(entry) {
     const historyList = document.getElementById("historyList");
     const newEntry = document.createElement("li");
-   // newEntry.className = "list-group-item";
+    // newEntry.className = "list-group-item";
     newEntry.textContent = entry;
     historyList.appendChild(newEntry);
 }
@@ -78,6 +83,35 @@ function resetConversation() {
     document.getElementById("Output").value = "";
 
     requete.focus();
+}
+
+function changeTitle(event) {
+    const select = event.target;
+    const value = select.value;
+    console.log(`selection value = ${value}`);
+    const selection = select.options[select.selectedIndex].text;
+
+    console.log(`selection text = ${selection}`);
+
+  //  autoriserSaisieIhm(true);
+
+    if (value == "0") {
+        console.log(`value == '0'`);
+        interdireSaisieIhm(true);
+        document.getElementById("headerlabel").innerHTML = "Sélectionner un modèle";
+    }
+    else {
+        interdireSaisieIhm(false);
+        document.getElementById("headerlabel").innerHTML = "Conversation avec " + selection;
+    }
+   
+}
+
+function interdireSaisieIhm(accessibilite = false) {
+    console.log(`accessibilite IHM = ${accessibilite}`);
+    resetConversation();
+    document.getElementById("requete").disabled = accessibilite;
+    document.getElementById("rechercher").disabled = accessibilite;
 }
 
 

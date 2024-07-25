@@ -110,7 +110,7 @@ function resetConversation() {
     document.getElementById("Question").value = "";
     document.getElementById("Question").style.height = "10%";
 
-    // efface les questions et réponses
+    // effacer les questions et réponses
     const parent = document.getElementById("showQuestionAnswer");
     while (parent.firstChild) {
         parent.firstChild.remove()

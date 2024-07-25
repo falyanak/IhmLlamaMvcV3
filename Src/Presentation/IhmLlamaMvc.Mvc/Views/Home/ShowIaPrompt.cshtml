@@ -1,6 +1,6 @@
 ﻿@model IhmLlamaMvc.Mvc.ViewModels.Conversation.ConversationViewModel
 
-<input asp-for="InitialesAgent" type="hidden" />
+@* <input asp-for="InitialesAgent" type="hidden" /> *@
 
 <div class="left-sidebar-grid">
 
@@ -12,7 +12,7 @@
                 <select asp-for="ModeleId" asp-items="@Model.listeModeles">
                 </select>
             </span>
-            <p class="right">Bonjour @Model.IdentiteAgent</p>
+            <p class="right">Bonjour @HttpContextAccessor.HttpContext?.User.Identity?.Name</p>
         </div>
     </header>
 

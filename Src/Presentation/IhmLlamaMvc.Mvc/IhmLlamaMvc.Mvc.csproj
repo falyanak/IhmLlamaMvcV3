@@ -7,7 +7,6 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
 		<PackageReference Include="BuildBundlerMinifier2022" Version="2.9.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.7" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
@@ -31,7 +30,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\Application\IhmLlamaMvc.Application\IhmLlamaMvc.Application.csproj" />
-	  <ProjectReference Include="..\..\Infrastructure\Authorization\IhmLlamaMvcV1.Authorization\IhmLlamaMvc.Authorization.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\CacheManager\IhmLlamaMvc.CacheManager\IhmLlamaMvc.CacheManager.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\IaModelProviders\IhmLlamaMvc.IaModelLlamaProvider\IhmLlamaMvc.IaModelLlamaProvider.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\Persistence\IhmLlamaMvc.Persistence\IhmLlamaMvc.Persistence.csproj" />

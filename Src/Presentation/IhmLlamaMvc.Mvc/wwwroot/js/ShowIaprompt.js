@@ -247,7 +247,7 @@ function showQuestion() {
 
     const data = document.getElementById("Question").value;
 
-    const initiales = document.getElementById("InitialesAgent").value;
+    const initiales = "XY";// document.getElementById("InitialesAgent").value;
     const dataWithPrefix = `${initiales} : ${data}`;
 
     createTextareaQuestion(nextId, dataWithPrefix);

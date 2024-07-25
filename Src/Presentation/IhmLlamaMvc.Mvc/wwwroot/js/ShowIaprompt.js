@@ -14,6 +14,15 @@ window.onload = function () {
     const reponses = document.querySelectorAll(".reponseclass");
     console.log(reponses);
 
+    document.getElementById("Question").addEventListener("keyup", function (event) {
+        if (event.key === 'Enter') {
+           
+            alert('Enter is pressed in the form');
+            document.getElementById("searchForm").requestSubmit();
+
+        }
+    });
+
     textareas.forEach(function (i) {
         i.addEventListener('input', function () {
             console.log("on input");

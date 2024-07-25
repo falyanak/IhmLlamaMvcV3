@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
 
         WebApi.Extensions.ServiceCollectionExtensions.AddWebApiAccessServices(services, configuration, logger);
        
-        Authorization.Extensions.ServiceCollectionExtensions.AddAuthorization(services, configuration, logger);
+    //    Authorization.Extensions.ServiceCollectionExtensions.AddAuthorization(services, configuration, logger);
 
         CacheManager.Extensions.ServiceCollectionExtensions.AddCacheInfrastructure(services, configuration, logger);
 

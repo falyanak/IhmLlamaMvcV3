@@ -15,20 +15,20 @@ public partial class HomeController
     private async Task<ConversationViewModel> CopierInfosVersConversationViewModel(
         IReadOnlyList<ModeleIA> listeModeles)
     {
-        var agentPermissions = (AgentPermissions)HttpContext.Session.GetJson<AgentPermissions>(
-            Constantes.SessionKeyInfosUser);
+        //var agentPermissions = (AgentPermissions)HttpContext.Session.GetJson<AgentPermissions>(
+        //    Constantes.SessionKeyInfosUser);
 
-        if (agentPermissions == null)
-        {
-            agentPermissions = await GetInfosAgent();
-        }
+        //if (agentPermissions == null)
+        //{
+        //    agentPermissions = await GetInfosAgent();
+        //}
 
         var conversationViewModel = new ConversationViewModel();
 
         IEnumerable<SelectListItem> listeFormatee = ConstruireListeFormateeModelesIA(listeModeles);
 
-        conversationViewModel.IdentiteAgent = $"{agentPermissions.Prenom} {agentPermissions.Nom}";
-        conversationViewModel.InitialesAgent = $"{agentPermissions.Prenom.First()} {agentPermissions.Nom.First()}";
+        //conversationViewModel.IdentiteAgent = $"{agentPermissions.Prenom} {agentPermissions.Nom}";
+        //conversationViewModel.InitialesAgent = $"{agentPermissions.Prenom.First()} {agentPermissions.Nom.First()}";
         conversationViewModel.listeModeles = listeFormatee;
         conversationViewModel.listeQuestions = new List<Question>();
 

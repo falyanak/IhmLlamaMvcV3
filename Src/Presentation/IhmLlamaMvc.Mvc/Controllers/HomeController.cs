@@ -3,7 +3,6 @@ using IhmLlamaMvc.Mvc.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using SiccrfAuthorization.Nuget.Interfaces;
 using SiccrfWebApiAccess.Nuget.Interfaces;
 using System.Diagnostics;
 
@@ -16,11 +15,11 @@ namespace IhmLlamaMvc.Mvc.Controllers
             IWebHostEnvironment webEnvironement,
             IHttpContextAccessor httpContextAccessor,
             IOptions<ApplicationSettings> applicationSettings,
-            ISiccrfAuthorizationService siccrfAuthorizationService,
+        //    ISiccrfAuthorizationService siccrfAuthorizationService,
             IWebApiAccessService webapiAccessService,
             ISender sender
         )
-            : base(siccrfAuthorizationService, log, applicationSettings, sender)
+            : base( log, applicationSettings, sender)
         {
         }
 

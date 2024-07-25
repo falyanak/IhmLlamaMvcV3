@@ -2,11 +2,9 @@ using IhmLlamaMvc.Application.Extensions;
 using IhmLlamaMvc.Mvc.Extensions;
 using IhmLlamaMvc.Mvc.Middleware;
 using IhmLlamaMvc.Persistence.EF;
-using IhmLlamaMvc.Persistence.Extensions;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using System.Configuration;
 
 // Logger pour la phase de build dans un fichier dédié
 Log.Logger = new LoggerConfiguration()
@@ -18,6 +16,8 @@ try
     Log.Information("starting server.");
 
     var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
     builder.Services.AddControllersWithViews();
     //.AddNewtonsoftJson(

@@ -1,9 +1,4 @@
-﻿using IhmLlamaMvc.Application.Interfaces;
-using IhmLlamaMvc.Domain.Entites.Conversations;
-using IhmLlamaMvc.Domain.Entites.IaModels;
-using IhmLlamaMvc.SharedKernel.Primitives.Result;
-
-namespace IhmLlamaMvc.Application.Services
+﻿namespace IhmLlamaMvc.Application.Services
 {
     public partial class ChatIaService
     {

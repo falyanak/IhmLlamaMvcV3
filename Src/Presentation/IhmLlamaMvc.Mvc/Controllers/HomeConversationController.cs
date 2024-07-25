@@ -1,11 +1,6 @@
 using IhmLlamaMvc.Application.UseCases.Conversations.Commands;
 using IhmLlamaMvc.Application.UseCases.IaModels.Queries;
-using IhmLlamaMvc.Mvc.Constants;
-using IhmLlamaMvc.Mvc.Extensions;
-using IhmLlamaMvc.Mvc.ViewModels.Conversation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using ReferentielAPI.Entites;
 
 namespace IhmLlamaMvc.Mvc.Controllers
 {

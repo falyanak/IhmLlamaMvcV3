@@ -86,7 +86,15 @@ p.left {
     font-size: 1vw;
 }
 
-
+div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: whitesmoke;
+    height: 3rem;
+    min-height: 3rem;
+    padding: 5px;
+}
 /* tablet breakpoint */
 
 @media (min-width:768px) {

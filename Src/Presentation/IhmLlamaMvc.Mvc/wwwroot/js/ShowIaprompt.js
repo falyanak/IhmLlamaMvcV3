@@ -16,8 +16,8 @@ window.onload = function () {
 
     document.getElementById("Question").addEventListener("keyup", function (event) {
         if (event.key === 'Enter') {
-           
-            alert('Enter is pressed in the form');
+            event.preventDefault();
+         //   alert('Enter is pressed in the form');
             document.getElementById("searchForm").requestSubmit();
 
         }
@@ -39,6 +39,22 @@ window.onload = function () {
     clearSessionStorage();
     storeObjectInSessionStorage(QUESTION_VALEUR_MAX_ID, 0);
     storeObjectInSessionStorage(REPONSE_VALEUR_MAX_ID, 0);
+
+    const sidebar = document.querySelector('#sidebar');
+    const showSidebar = document.querySelector('#show-sidebar');
+    const closeSidebar = document.querySelector('#close-sidebar');
+
+    showSidebar.onclick = () => {
+        sidebar.classList.toggle('collapsed');
+    };
+
+    closeSidebar.onclick = () => {
+        sidebar.classList.toggle('collapsed');
+    };
+
+    // cacher l'indicateur de chargement
+    hideBusyIndicator();
+
   
     Question.focus()
 };
@@ -152,7 +168,7 @@ function showResponse(data) {
 
     const answer = document.getElementById(id);
 
-    alert(answer.name);
+//    alert(answer.name);
 
     setDynamicHeight(answer);
 
@@ -240,7 +256,7 @@ function showQuestion() {
 
     const question = document.getElementById(id);
 
-    alert(`question = ${question}`);
+ //   alert(`question = ${question}`);
 
     setDynamicHeight(question);
 

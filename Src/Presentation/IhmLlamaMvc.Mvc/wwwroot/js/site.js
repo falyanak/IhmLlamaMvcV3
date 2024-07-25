@@ -4,9 +4,9 @@
 // Write your JavaScript code.
 
 function showBusyIndicator() {
-    $('.spinner-border').show();
+    document.getElementById('buttonload').style.display = '';
 }
 
 function hideBusyIndicator() {
-    $('.spinner-border').hide();
+    document.getElementById('buttonload').style.display = 'none';
 }
